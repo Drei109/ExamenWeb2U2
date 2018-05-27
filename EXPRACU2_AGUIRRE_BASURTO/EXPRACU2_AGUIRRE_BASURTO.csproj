@@ -200,15 +200,12 @@
     <Compile Include="Controllers\HorasExtraController.cs" />
     <Compile Include="Controllers\LicenciaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\MantenimientoController.cs" />
-=======
     <Compile Include="Controllers\PermisoAvanzadoController.cs" />
     <Compile Include="Controllers\PermisoSimpleController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\PrestamoController.cs" />
     <Compile Include="Controllers\TurnoController.cs" />
->>>>>>> 870f0b1680ffbecaf83b2ccfe79524d3c65a2920
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
