@@ -21,7 +21,7 @@
                 </div>
             </div>
             <!--begin::Form-->
-        @using (Html.BeginForm("AgregarPersonal", "Mantenimiento", FormMethod.Post, new {@class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form"}))
+        @using (Html.BeginForm("Agregar", "Persona", FormMethod.Post, new {@class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form"}))
         {
             @Html.AntiForgeryToken()
             <div class="m-portlet__body">
