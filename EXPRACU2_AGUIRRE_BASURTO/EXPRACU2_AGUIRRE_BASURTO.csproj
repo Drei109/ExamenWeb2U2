@@ -257,6 +257,18 @@
     <Compile Include="Migrations\201805271751582_ForeignKeysNameChanged.Designer.cs">
       <DependentUpon>201805271751582_ForeignKeysNameChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805271909514_PersonaColumnInAsistenciaChanged.cs" />
+    <Compile Include="Migrations\201805271909514_PersonaColumnInAsistenciaChanged.Designer.cs">
+      <DependentUpon>201805271909514_PersonaColumnInAsistenciaChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271911031_PersonaColumnInAsistenciaChanged1.cs" />
+    <Compile Include="Migrations\201805271911031_PersonaColumnInAsistenciaChanged1.Designer.cs">
+      <DependentUpon>201805271911031_PersonaColumnInAsistenciaChanged1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805272116267_HorasCantidadTypeChanged.cs" />
+    <Compile Include="Migrations\201805272116267_HorasCantidadTypeChanged.Designer.cs">
+      <DependentUpon>201805272116267_HorasCantidadTypeChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Asignacion.cs" />
     <Compile Include="Models\Asistencia.cs" />
@@ -609,8 +621,6 @@
     <Folder Include="Views\Mantenimiento\" />
     <Folder Include="Views\PermisoAvanzado\" />
     <Folder Include="Views\PermisoSimple\" />
-    <Folder Include="Views\Persona\" />
-    <Folder Include="Views\Prestamo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -663,6 +673,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805271751582_ForeignKeysNameChanged.resx">
       <DependentUpon>201805271751582_ForeignKeysNameChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271909514_PersonaColumnInAsistenciaChanged.resx">
+      <DependentUpon>201805271909514_PersonaColumnInAsistenciaChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271911031_PersonaColumnInAsistenciaChanged1.resx">
+      <DependentUpon>201805271911031_PersonaColumnInAsistenciaChanged1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805272116267_HorasCantidadTypeChanged.resx">
+      <DependentUpon>201805272116267_HorasCantidadTypeChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

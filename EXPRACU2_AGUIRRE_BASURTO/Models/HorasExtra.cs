@@ -16,7 +16,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         [StringLength(255)]
         public string Motivo { get; set; }
         public bool Aumenta { get; set; }
-        public byte HorasCantidad { get; set; }
+        public TimeSpan? HorasCantidad { get; set; }
         public int? PersonaId { get; set; }
     }
 }
