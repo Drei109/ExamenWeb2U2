@@ -599,6 +599,8 @@
     <Content Include="Views\Turno\Agregar.cshtml" />
     <Content Include="Views\Asistencia\TomarAsistencia.cshtml" />
     <Content Include="Views\Prestamo\Agregar.cshtml" />
+    <Content Include="Views\Prestamo\Index.cshtml" />
+    <Content Include="Views\Prestamo\Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -609,8 +611,6 @@
     <Folder Include="Views\Mantenimiento\" />
     <Folder Include="Views\PermisoAvanzado\" />
     <Folder Include="Views\PermisoSimple\" />
-    <Folder Include="Views\Persona\" />
-    <Folder Include="Views\Prestamo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
