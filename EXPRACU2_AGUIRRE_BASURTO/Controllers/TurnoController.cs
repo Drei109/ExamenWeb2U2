@@ -64,11 +64,11 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                 {
                     if (tur.Id > 0)
                     {
-                        db.Entry(this).State = EntityState.Modified;
+                        db.Entry(tur).State = EntityState.Modified;
                     }
                     else
                     {
-                        db.Entry(this).State = EntityState.Added;
+                        db.Entry(tur).State = EntityState.Added;
                     }
                     db.SaveChanges();
                 }
