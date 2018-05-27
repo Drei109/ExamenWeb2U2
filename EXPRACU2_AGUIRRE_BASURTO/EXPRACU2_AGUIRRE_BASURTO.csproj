@@ -192,10 +192,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsignacionController.cs" />
+    <Compile Include="Controllers\AsistenciaController.cs" />
+    <Compile Include="Controllers\CompensacionesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorasExtraController.cs" />
+    <Compile Include="Controllers\LicenciaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\MantenimientoController.cs" />
+=======
+    <Compile Include="Controllers\PermisoAvanzadoController.cs" />
+    <Compile Include="Controllers\PermisoSimpleController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\PrestamoController.cs" />
+    <Compile Include="Controllers\TurnoController.cs" />
+>>>>>>> 870f0b1680ffbecaf83b2ccfe79524d3c65a2920
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -577,6 +590,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Asignacion\" />
+    <Folder Include="Views\Asistencia\" />
+    <Folder Include="Views\Compensaciones\" />
+    <Folder Include="Views\HorasExtra\" />
+    <Folder Include="Views\Licencia\" />
+    <Folder Include="Views\PermisoAvanzado\" />
+    <Folder Include="Views\PermisoSimple\" />
+    <Folder Include="Views\Persona\" />
+    <Folder Include="Views\Prestamo\" />
+    <Folder Include="Views\Turno\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
