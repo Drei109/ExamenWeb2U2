@@ -29,25 +29,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             return View();
         }
 
-        public ActionResult ListarPersonal()
-        {
-            return View();
-        }
-
-        public ActionResult AgregarPersonal()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AgregarPersonal(AgregarPersonalViewModel model)
-        {
-            //var Persona = Mapper.Map<AgregarPersonalViewModel, Persona>(model);
-            //_context.Personal.Add(Persona);
-            //_context.SaveChanges();
-            return View();
-        }
-
+        
 
     }
 }

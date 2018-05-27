@@ -41,7 +41,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
         }
         public ActionResult Buscar(String criterio)
         {
-            var persona1 = new List<PermisoAvanzado();
+            var persona1 = new List<PermisoAvanzado>();
             using (var db = new ApplicationDbContext())
             {
                 persona1 = db.PermisosAvanzados.Where(x => x.Persona.Nombres.Contains(criterio)).ToList();

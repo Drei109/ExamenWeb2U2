@@ -582,8 +582,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
-    <Content Include="Views\Mantenimiento\ListarPersonal.cshtml" />
-    <Content Include="Views\Mantenimiento\AgregarPersonal.cshtml" />
+    <Content Include="Views\Persona\ListarPersonal.cshtml" />
+    <Content Include="Views\Persona\AgregarPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -592,9 +592,9 @@
     <Folder Include="Views\Compensaciones\" />
     <Folder Include="Views\HorasExtra\" />
     <Folder Include="Views\Licencia\" />
+    <Folder Include="Views\Mantenimiento\" />
     <Folder Include="Views\PermisoAvanzado\" />
     <Folder Include="Views\PermisoSimple\" />
-    <Folder Include="Views\Persona\" />
     <Folder Include="Views\Prestamo\" />
     <Folder Include="Views\Turno\" />
   </ItemGroup>
