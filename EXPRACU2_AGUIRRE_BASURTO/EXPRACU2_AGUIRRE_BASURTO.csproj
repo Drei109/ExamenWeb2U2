@@ -245,6 +245,18 @@
     <Compile Include="Migrations\201805262012398_LicenciaAndAsignacionTablesAdded.Designer.cs">
       <DependentUpon>201805262012398_LicenciaAndAsignacionTablesAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805270458560_ForeignKeyInPersonaAdded.cs" />
+    <Compile Include="Migrations\201805270458560_ForeignKeyInPersonaAdded.Designer.cs">
+      <DependentUpon>201805270458560_ForeignKeyInPersonaAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271642572_NullableAsistenciaColumns.cs" />
+    <Compile Include="Migrations\201805271642572_NullableAsistenciaColumns.Designer.cs">
+      <DependentUpon>201805271642572_NullableAsistenciaColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271751582_ForeignKeysNameChanged.cs" />
+    <Compile Include="Migrations\201805271751582_ForeignKeysNameChanged.Designer.cs">
+      <DependentUpon>201805271751582_ForeignKeysNameChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Asignacion.cs" />
     <Compile Include="Models\Asistencia.cs" />
@@ -585,11 +597,11 @@
     <Content Include="Views\Persona\ListarPersonal.cshtml" />
     <Content Include="Views\Persona\AgregarPersonal.cshtml" />
     <Content Include="Views\Turno\Agregar.cshtml" />
+    <Content Include="Views\Asistencia\TomarAsistencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Asignacion\" />
-    <Folder Include="Views\Asistencia\" />
     <Folder Include="Views\Compensaciones\" />
     <Folder Include="Views\HorasExtra\" />
     <Folder Include="Views\Licencia\" />
@@ -640,6 +652,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805262012398_LicenciaAndAsignacionTablesAdded.resx">
       <DependentUpon>201805262012398_LicenciaAndAsignacionTablesAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805270458560_ForeignKeyInPersonaAdded.resx">
+      <DependentUpon>201805270458560_ForeignKeyInPersonaAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271642572_NullableAsistenciaColumns.resx">
+      <DependentUpon>201805271642572_NullableAsistenciaColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271751582_ForeignKeysNameChanged.resx">
+      <DependentUpon>201805271751582_ForeignKeysNameChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

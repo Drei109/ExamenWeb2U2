@@ -47,6 +47,8 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             }
             return View(persona1);
         }
+
+        [Route("Mantenimiento/Turno/Agregar")]
         public ActionResult Agregar(int id = 0)
         {
             using (var db = new ApplicationDbContext())
@@ -56,6 +58,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             }
             return View(id == 0 ? new Turno() : turno);
         }
+
         public ActionResult Guardar(Turno tur)
         {
             if (ModelState.IsValid)

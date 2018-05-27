@@ -29,29 +29,58 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
         [Route("Mantenimiento/Persona/Listar")]
         public ActionResult ListarPersonal()
         {
-            var Personal = _context.Personal.ToList();
+            var Personal = _context.Personal.Include(m => m.Turno).ToList();
             return View(Personal);
         }
 
 
-        [Route("Mantenimiento/Persona/Agregar")]
-        public ActionResult AgregarPersonal()
+        [Route("Mantenimiento/Persona/Agregar/{id}")]
+        public ActionResult AgregarPersonal(int id = 0)
         {
-            return View();
+            var turnos = _context.Turnos.ToList();
+            if (id == 0)
+            {
+                var viewModel = new AgregarPersonalViewModel()
+                {
+                    FechaNacimiento = DateTime.Today,
+                    Turnos = turnos
+                };
+                return View(viewModel);
+            }
+            else
+            {
+                var personaInDb = _context.Personal.Single(p => p.Id == id);
+                var viewModelInDb = new AgregarPersonalViewModel();
+                Mapper.Map(personaInDb, viewModelInDb);
+                viewModelInDb.Turnos = turnos;
+                return View(viewModelInDb);
+            }
         }
 
 
         [HttpPost]
         public ActionResult Agregar(AgregarPersonalViewModel model)
         {
-            var Persona = Mapper.Map<AgregarPersonalViewModel, Persona>(model);
-            if (!ModelState.IsValid)
+            var persona = Mapper.Map<AgregarPersonalViewModel, Persona>(model);
+
+            if (ModelState.IsValid)
             {
-                _context.Personal.Add(Persona);
+                if (model.Id == 0)
+                {
+                    _context.Personal.Add(persona);
+                }
+                else
+                {
+                    var personaInDb = _context.Personal.Single(p => p.Id == model.Id);
+                    Mapper.Map(model,personaInDb);
+                }
                 _context.SaveChanges();
                 return RedirectToAction("ListarPersonal");
+                
             }
-            return View("AgregarPersonal");
+            var turnos = _context.Turnos.ToList();
+            model.Turnos = turnos;
+            return View("AgregarPersonal",model);
         }
 
 

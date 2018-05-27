@@ -14,5 +14,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         [Required]
         [Column(TypeName = "Date")]
         public DateTime Fecha { get; set; }
+        public int PersonaId { get; set; }
     }
 }

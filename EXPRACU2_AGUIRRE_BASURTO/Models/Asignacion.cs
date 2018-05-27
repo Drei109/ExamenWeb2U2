@@ -18,8 +18,8 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         public decimal Total { get; set; }
         [StringLength(255)]
         public string Estado { get; set; }
-        
-        
+        public int PersonaId { get; set; }
+
 
     }
 }

@@ -56,11 +56,15 @@ namespace EXPRACU2_AGUIRRE_BASURTO.ViewModels
         [StringLength(255)]
         public string Estado { get; set; }
 
+        public int TurnoId { get; set; }
+
         public enum SexoEnum
         {
             Masculino,
             Femenino
         }
+
+        public IEnumerable<Turno> Turnos { get; set; }
         //public Turno Turno { get; set; }
     }
 }

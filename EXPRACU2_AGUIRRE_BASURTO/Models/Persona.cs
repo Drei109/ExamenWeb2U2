@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,6 +36,15 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         [StringLength(255)]
         public string Estado { get; set; }
         public byte HorasExtraAcumuladas { get; set; }
+        public int? TurnoId { get; set; }
         public Turno Turno { get; set; }
+        public virtual ICollection<Asistencia> Asistencias { get; set; }
+        public virtual ICollection<Asignacion> Asignaciones { get; set; }
+        public virtual ICollection<Compensacion> Compensaciones { get; set; }
+        public virtual ICollection<HorasExtra> HorasExtras { get; set; }
+        public virtual ICollection<Licencia> Licencias { get; set; }
+        public virtual ICollection<PermisoSimple> PermisosSimples { get; set; }
+        public virtual ICollection<PermisoAvanzado> PermisosAvanzados { get; set; }
+        public virtual ICollection<Prestamo> Prestamos { get; set; }
     }
 }

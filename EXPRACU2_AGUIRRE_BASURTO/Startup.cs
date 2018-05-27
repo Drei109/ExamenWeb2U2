@@ -15,6 +15,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO
 
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<AgregarPersonalViewModel,Persona>();
+                cfg.CreateMap<Persona, AgregarPersonalViewModel>();
             });
         }
     }

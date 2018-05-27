@@ -9,7 +9,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public Persona Persona { get; set; }
         [Required]
         [Column(TypeName = "Date")]
@@ -18,6 +17,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         public string Motivo { get; set; }
         public bool Aumenta { get; set; }
         public byte HorasCantidad { get; set; }
-        
+        public int? PersonaId { get; set; }
     }
 }

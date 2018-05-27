@@ -22,5 +22,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         public DateTime FechaFin { get; set; }
         [StringLength(255)]
         public string Estado { get; set; }
+        public int PersonaId { get; set; }
     }
 }

@@ -14,11 +14,13 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         [Column(TypeName = "Date")]
         [Required]
         public DateTime Fecha { get; set; }
-        public TimeSpan HoraLLegada { get; set; }
-        public TimeSpan HoraSalida { get; set; }
+        public TimeSpan? HoraLLegada { get; set; }
+        public TimeSpan? HoraSalida { get; set; }
         public bool EsFinSemana { get; set; }
         public bool EsFeriado { get; set; }
         [StringLength(255)]
         public string Estado { get; set; }
+        public int? PersonaId { get; set; }
+
     }
 }

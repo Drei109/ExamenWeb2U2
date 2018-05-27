@@ -17,5 +17,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         public string Descripcion { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
+        public virtual ICollection<Persona> Personas { get; set; }
     }
 }

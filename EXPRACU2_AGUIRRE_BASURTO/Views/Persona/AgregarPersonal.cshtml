@@ -24,6 +24,7 @@
         @using (Html.BeginForm("Agregar", "Persona", FormMethod.Post, new {@class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form"}))
         {
             @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
             <div class="m-portlet__body">
                 <div class="form-group m-form__group row">
                     <div class="col-lg-6">
@@ -33,6 +34,7 @@
                             @class = "form-control m-input",
                             @placeholder = "Ingrese los nombres del personal"
                         })
+                        @Html.ValidationMessageFor(m => m.Nombres)
                     </div>
                     <div class="col-lg-6">
                     </div>
@@ -45,6 +47,7 @@
                             @class = "form-control m-input",
                             @placeholder = "Ingrese apellido paterno"
                         })
+                        @Html.ValidationMessageFor(m => m.ApellidoPaterno)
                     </div>
                     <div class="col-lg-6">
                         @Html.LabelFor(m => m.ApellidoMaterno):
@@ -53,6 +56,7 @@
                             @class = "form-control m-input",
                             @placeholder = "Ingrese apellido materno"
                         })
+                        @Html.ValidationMessageFor(m => m.ApellidoMaterno)
                     </div>
                 </div>
                     
@@ -65,14 +69,17 @@
                             @class = "form-control m-input",
                             @placeholder = "Ingrese DNI"
                         })
+                        @Html.ValidationMessageFor(m => m.DNI)
                     </div>
                     <div class="col-lg-6">
                         @Html.LabelFor(m => m.FechaNacimiento):
-                        @Html.TextBoxFor(m => m.FechaNacimiento, new
+                        @Html.TextBoxFor(m => m.FechaNacimiento, "{0:dd/MM/yyyy}",new
                         {
                             @class = "form-control m-input",
+                            @id="m_datepicker_2",
                             @placeholder = "Ingrese fecha de nacimiento"
                         })
+                        @Html.ValidationMessageFor(m => m.FechaNacimiento)
                     </div>
                 </div>
                     
@@ -90,8 +97,10 @@
                         @Html.TextBoxFor(m => m.Telefono, new
                         {
                             @class = "form-control m-input",
-                            @placeholder = "Ingrese teléfono"
+                            @placeholder = "Ingrese teléfono",
+                            @type="phone"
                         })
+                        @Html.ValidationMessageFor(m => m.Telefono)
                     </div>
                 </div>
                     
@@ -101,7 +110,10 @@
                         @Html.TextBoxFor(m => m.CantHijos, new
                         {
                             @class = "form-control m-input",
-                            @placeholder = "Ingrese cantidad de hijos"
+                            @placeholder = "Ingrese cantidad de hijos",
+                            @type="number",
+                            min=0,
+                            max=20
                         })
                     </div>
                     <div class="col-lg-6">
@@ -110,6 +122,14 @@
                         @Html.DropDownListFor(m => m.Sexo, new SelectList(Enum.GetValues(typeof(AgregarPersonalViewModel.SexoEnum))), new { @class = "form-control m-input" })
                     </div>
                 </div>
+                
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.TurnoId):
+                        @Html.DropDownListFor(m => m.TurnoId, new SelectList(Model.Turnos,"Id","Descripcion"),"Seleccione un turno", new { @class = "form-control m-input" })
+                    </div>
+                </div>
+
             </div>
 
             <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
@@ -119,9 +139,9 @@
                             <button type="submit" class="btn btn-primary">
                                 Save
                             </button>
-                            <button type="reset" class="btn btn-secondary">
+                            <a href="/Mantenimiento/Persona/Listar" class="btn btn-secondary">
                                 Cancel
-                            </button>
+                            </a>
                         </div>
                         <div class="col-lg-6 m--align-right">
                             <button type="reset" class="btn btn-danger">
