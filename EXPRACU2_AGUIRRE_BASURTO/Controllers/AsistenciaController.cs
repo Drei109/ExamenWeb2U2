@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
 {
@@ -22,10 +23,14 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             _context.Dispose();
         }
 
-        [Route("Mantenimiento/Asistencia/TomarAsistencia")]
-        public ActionResult TomarAsistencia()
+        //[Route("Mantenimiento/Asistencia/TomarAsistencia/{year}/{month:regex(\\d{2}):range(1,12)}/{day:regex(\\d{2}):range(1,31)}")]
+        //[Route("Mantenimiento/Asistencia/TomarAsistencia/")]
+        public ActionResult TomarAsistencia(string fecha)
         {
-            var asistenciasHoy = _context.Asistencias.Include(p => p.Persona).Where(m => m.Fecha == DateTime.Today).ToList();
+            var fechaAsistencia = !fecha.IsNullOrWhiteSpace() ? Convert.ToDateTime(fecha) : DateTime.Today;
+            ViewBag.Fecha = fechaAsistencia.Date;
+
+            var asistenciasHoy = _context.Asistencias.Include(p => p.Persona).Where(m => m.Fecha == fechaAsistencia).ToList();
             if (asistenciasHoy.Count == 0)
             {
                 var personal = _context.Personal.ToList();
@@ -34,7 +39,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                 {
                     var asistencia = new Asistencia()
                     {
-                        Fecha = DateTime.Today,
+                        Fecha = fechaAsistencia,
                         PersonaId = p.Id,
                         Persona = _context.Personal.SingleOrDefault(x => x.Id == p.Id)
                     };
@@ -52,7 +57,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             }
         }
 
-        [Route("Mantenimiento/Asistencia/Guardar")]
+        //[Route("Mantenimiento/Asistencia/Guardar")]
         public ActionResult Guardar(List<Asistencia> listaModel)
         {
             foreach (var asistencia in listaModel)
