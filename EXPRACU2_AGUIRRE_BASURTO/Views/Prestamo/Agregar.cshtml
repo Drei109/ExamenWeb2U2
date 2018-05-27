@@ -1,0 +1,124 @@
+﻿@model EXPRACU2_AGUIRRE_BASURTO.Models.Prestamo
+@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    ViewBag.Title = "Prestamo";
+    //List<EXPRACU2_AGUIRRE_BASURTO.Models.Persona> persona = ViewBag.Persona;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <!--begin::Portlet-->
+        <div class="m-portlet">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon m--hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="m-portlet__head-text">
+                            Agregar Turno
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            @using (Html.BeginForm("Guardar", "Prestamo", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                            @Html.Label("Categoria:")
+                            <select name="Id" class="form-control">
+                                @*<option @(Model.Persona.Id.Equals("") ? "selected" : "") value="">-Seleccione</option>
+    @foreach (var p in persona)
+    {
+        <option @(Model.Persona.Id.Equals(p.Id) ? "Selected" : ""  ) value="@p.Id">@p.Nombres</option>
+    }*@
+                            </select>
+                            @Html.ValidationMessageFor(x => x.Id, null, new { @class = "label label-danger" })
+                        </div>
+                        <div class="col-lg-6">
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.Fecha)
+                            @Html.TextBoxFor(m => m.Fecha, new
+                       {
+                           @class = "form-control",
+                           @id = "m_datepicker_2",
+                           @readonly = "readonly",
+                           @placeholder = "Select time"
+                       })
+                        </div>
+
+                    </div>                 
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.Cantidad)
+                            @Html.TextBoxFor(m => m.Cantidad, new
+                       {
+                           @class = "form-control",
+                           @id = "m_touchspin_2_2",                          
+                           @placeholder = "Selecciona Cantidad"
+                       })
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.Cuotas)
+                            @Html.TextBoxFor(m => m.Cuotas, new
+                       {
+                           @class = "form-control",
+                           @id = "m_touchspin_4",
+                           @readonly = "readonly",
+                           @placeholder = "Ingrese Hora de Inicio"
+                       })
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.Interes)
+                            @Html.TextBoxFor(m => m.Interes, new
+                       {
+                           @class = "form-control",
+                           @id = "m_touchspin_1",
+                           @readonly = "readonly",
+                           @placeholder = "Ingrese Hora de Inicio"
+                       })
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <select name="Estado" class="form-control">
+                            <option @(Model.Estado == "" ? "Selected" : "") value="">Seleccione</option>
+                            <option @(Model.Estado == "" ? "Selected" : "Activo") value="A">Activo</option>
+                            <option @(Model.Estado == "" ? "Selected" : "Inactivo") value="I">Inactivo</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+                    <div class="m-form__actions m-form__actions--solid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    Cancel
+                                </button>
+                            </div>
+                            <div class="col-lg-6 m--align-right">
+                                <button type="reset" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!--end::Form-->
+        </div>
+        <!--end::Portlet-->
+    </div>
+</div>

@@ -598,6 +598,7 @@
     <Content Include="Views\Persona\AgregarPersonal.cshtml" />
     <Content Include="Views\Turno\Agregar.cshtml" />
     <Content Include="Views\Asistencia\TomarAsistencia.cshtml" />
+    <Content Include="Views\Prestamo\Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -608,6 +609,7 @@
     <Folder Include="Views\Mantenimiento\" />
     <Folder Include="Views\PermisoAvanzado\" />
     <Folder Include="Views\PermisoSimple\" />
+    <Folder Include="Views\Persona\" />
     <Folder Include="Views\Prestamo\" />
   </ItemGroup>
   <ItemGroup>
