@@ -11,6 +11,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
     public class PrestamoController : Controller
     {
         private Prestamo prestamo = new Prestamo();
+        private Persona persona = new Persona();
         // GET: Persona
         public ActionResult Index(String criterio)
         {
@@ -22,7 +23,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                 {
                     using (var db = new ApplicationDbContext())
                     {
-                        per = db.Prestamos.ToList();
+                        per = db.Prestamos.Include("Personal").ToList();
 
                     }
                 }
@@ -44,7 +45,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             var persona1 = new List<Prestamo>();
             using (var db = new ApplicationDbContext())
             {
-                persona1 = db.Prestamos.Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
+                persona1 = db.Prestamos.Include("Personal").Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
             }
             return View(persona1);
         }
@@ -52,17 +53,20 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
         {
             using (var db = new ApplicationDbContext())
             {
-                prestamo = db.Prestamos.Where(x => x.Id == id).SingleOrDefault();
-
+                //ViewBag.Persona = db.Personal.ToList();
+                prestamo = db.Prestamos.Where(x => x.Id == id).SingleOrDefault();         
             }
+            
             return View(id == 0 ? new Prestamo() : prestamo);
         }
         public ActionResult Guardar(Prestamo persona)
         {
+
             if (ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
                 {
+                    ViewBag.Persona = db.Personal.ToList();
                     if (persona.Id > 0)
                     {
                         db.Entry(this).State = EntityState.Modified;

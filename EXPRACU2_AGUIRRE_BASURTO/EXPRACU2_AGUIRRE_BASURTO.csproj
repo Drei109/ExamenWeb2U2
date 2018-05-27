@@ -585,6 +585,7 @@
     <Content Include="Views\Mantenimiento\ListarPersonal.cshtml" />
     <Content Include="Views\Mantenimiento\AgregarPersonal.cshtml" />
     <Content Include="Views\Turno\Agregar.cshtml" />
+    <Content Include="Views\Prestamo\Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -596,7 +597,6 @@
     <Folder Include="Views\PermisoAvanzado\" />
     <Folder Include="Views\PermisoSimple\" />
     <Folder Include="Views\Persona\" />
-    <Folder Include="Views\Prestamo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
