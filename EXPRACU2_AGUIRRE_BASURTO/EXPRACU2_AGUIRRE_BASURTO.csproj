@@ -611,6 +611,8 @@
     <Content Include="Views\Turno\Agregar.cshtml" />
     <Content Include="Views\Asistencia\TomarAsistencia.cshtml" />
     <Content Include="Views\Prestamo\Agregar.cshtml" />
+    <Content Include="Views\Prestamo\Index.cshtml" />
+    <Content Include="Views\Prestamo\Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

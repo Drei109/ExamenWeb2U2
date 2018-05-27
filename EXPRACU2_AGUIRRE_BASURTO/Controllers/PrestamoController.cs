@@ -23,7 +23,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                 {
                     using (var db = new ApplicationDbContext())
                     {
-                        per = db.Prestamos.Include("Personal").ToList();
+                        per = db.Prestamos.Include(x=>x.Persona).ToList();
 
                     }
                 }
@@ -51,29 +51,36 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
         }
         public ActionResult Agregar(int id = 0)
         {
+          
             using (var db = new ApplicationDbContext())
             {
-                //ViewBag.Persona = db.Personal.ToList();
+                List<Persona> person = db.Personal.ToList();
+                ViewBag.Persona = person;
                 prestamo = db.Prestamos.Where(x => x.Id == id).SingleOrDefault();         
             }
             
             return View(id == 0 ? new Prestamo() : prestamo);
         }
-        public ActionResult Guardar(Prestamo persona)
+        public ActionResult Guardar(Prestamo prestamo1)
         {
-
+            prestamo1.Total = (prestamo1.Cantidad + (prestamo1.Cantidad * (prestamo1.Interes / 100)));
+            using (var db = new ApplicationDbContext())
+            {
+                List<Persona> person = db.Personal.ToList();
+                ViewBag.Persona = person;
+            }
             if (ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
                 {
-                    ViewBag.Persona = db.Personal.ToList();
-                    if (persona.Id > 0)
+                   
+                    if (prestamo1.Id > 0)
                     {
-                        db.Entry(this).State = EntityState.Modified;
+                        db.Entry(prestamo1).State = EntityState.Modified;
                     }
                     else
                     {
-                        db.Entry(this).State = EntityState.Added;
+                        db.Entry(prestamo1).State = EntityState.Added;
                     }
                     db.SaveChanges();
                 }
@@ -81,7 +88,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             }
             else
             {
-                return View("~/Views/Prestamo/Agregar.cshtml", persona);
+                return View("~/Views/Prestamo/Agregar.cshtml", prestamo);
             }
         }
         public ActionResult Eliminar(int id = 0)
@@ -89,10 +96,19 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             prestamo.Id = id;
             using (var db = new ApplicationDbContext())
             {
-                db.Entry(this).State = EntityState.Deleted;
+                db.Entry(prestamo).State = EntityState.Deleted;
                 db.SaveChanges();
             }
             return Redirect("~/Prestamo");
+        }
+        public ActionResult Detalles(int id)
+        {
+            using (var db =  new ApplicationDbContext())
+            {
+                prestamo = db.Prestamos.Where(x => x.Id == id).SingleOrDefault();
+            }
+            return View(prestamo);
+            
         }
     }
 }
