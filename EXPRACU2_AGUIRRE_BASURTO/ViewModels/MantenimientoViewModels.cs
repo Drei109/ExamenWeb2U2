@@ -67,4 +67,11 @@ namespace EXPRACU2_AGUIRRE_BASURTO.ViewModels
         public IEnumerable<Turno> Turnos { get; set; }
         //public Turno Turno { get; set; }
     }
+
+    public class CompensacionViewModel
+    {
+        public Compensacion Compensacion { get; set; }
+        public IEnumerable<Persona> Personas { get; set; }
+    }
+
 }

@@ -56,8 +56,9 @@
                             <th title="Field #1">ID</th>
                             <th title="Field #2">Nombres</th>
                             <th title="Field #3">DNI</th>
-                            <th title="Field #4">Turno</th>
-                            <th title="Field #5"></th>
+                            <th title="Field #4">Horas Extra Acumuladas</th>
+                            <th title="Field #5">Turno</th>
+                            <th title="Field #6"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,6 +68,7 @@
                                 <td>@p.Id</td>
                                 <td>@p.Nombres @p.ApellidoPaterno @p.ApellidoMaterno</td>
                                 <td>@p.DNI</td>
+                                <td>@p.HorasExtraAcumuladas</td>
                                     @if (p.Turno != null)
                                     {
                                         <td>@p.Turno.Descripcion</td>

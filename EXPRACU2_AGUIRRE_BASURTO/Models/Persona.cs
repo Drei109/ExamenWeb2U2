@@ -35,7 +35,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
         public string Sexo { get; set; }
         [StringLength(255)]
         public string Estado { get; set; }
-        public byte HorasExtraAcumuladas { get; set; }
+        public TimeSpan? HorasExtraAcumuladas { get; set; }
         public int? TurnoId { get; set; }
         public Turno Turno { get; set; }
         public virtual ICollection<Asistencia> Asistencias { get; set; }

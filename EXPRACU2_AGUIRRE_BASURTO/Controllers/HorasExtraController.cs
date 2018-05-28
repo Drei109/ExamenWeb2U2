@@ -10,85 +10,43 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
 {
     public class HorasExtraController : Controller
     {
-        private  HorasExtra Horas = new HorasExtra();
-        // GET: Persona
-        public ActionResult Index(String criterio)
+        private ApplicationDbContext _context;
+
+        public HorasExtraController()
         {
-
-            if (criterio == null || criterio == "")
-            {
-                var per = new List<HorasExtra>();
-                try
-                {
-                    using (var db = new ApplicationDbContext())
-                    {
-                        per = db.HorasExtra.ToList();
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-
-                }
-                return View(per);
-            }
-            else
-            {
-
-                return View(Buscar(criterio));
-            }
+            _context = new ApplicationDbContext();
         }
-        public ActionResult Buscar(String criterio)
-        {
-            var persona1 = new List<HorasExtra>();
-            using (var db = new ApplicationDbContext())
-            {
-                persona1 = db.HorasExtra.Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
-            }
-            return View(persona1);
-        }
-        public ActionResult Agregar(int id = 0)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                Horas = db.HorasExtra.Where(x => x.Id == id).SingleOrDefault();
 
-            }
-            return View(id == 0 ? new HorasExtra() : Horas);
-        }
-        public ActionResult Guardar(HorasExtra persona)
+        protected override void Dispose(bool disposing)
         {
-            if (ModelState.IsValid)
+            _context.Dispose();
+        }
+
+        public ActionResult ListarHorasExtra()
+        {
+            ActualizarHoras();
+            var horasExtra = _context.HorasExtra.Include(m => m.Persona).ToList();
+            return View(horasExtra);
+        }
+
+        private void ActualizarHoras()
+        {
+            var personas = _context.Personal.ToList();
+            foreach (var per in personas)
             {
-                using (var db = new ApplicationDbContext())
+                var persona = _context.Personal.SingleOrDefault(m => m.Id == per.Id);
+                var horasExtraPersona = _context.HorasExtra.Where(m => m.PersonaId == persona.Id);
+                TimeSpan? total = TimeSpan.Zero;
+                foreach (var horasExtra in horasExtraPersona)
                 {
-                    if (persona.Id > 0)
-                    {
-                        db.Entry(this).State = EntityState.Modified;
-                    }
+                    if (horasExtra.Aumenta)
+                        total += horasExtra.HorasCantidad;
                     else
-                    {
-                        db.Entry(this).State = EntityState.Added;
-                    }
-                    db.SaveChanges();
+                        total -= horasExtra.HorasCantidad;
                 }
-                return Redirect("~/HorasExtra");
+                persona.HorasExtraAcumuladas = total;
             }
-            else
-            {
-                return View("~/Views/HorasExtra/Agregar.cshtml", persona);
-            }
-        }
-        public ActionResult Eliminar(int id = 0)
-        {
-            Horas.Id = id;
-            using (var db = new ApplicationDbContext())
-            {
-                db.Entry(this).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
-            return Redirect("~/HorasExtra");
+            _context.SaveChanges();
         }
     }
 }

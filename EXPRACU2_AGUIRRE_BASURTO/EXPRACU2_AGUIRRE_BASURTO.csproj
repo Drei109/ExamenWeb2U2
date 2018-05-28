@@ -269,6 +269,14 @@
     <Compile Include="Migrations\201805272116267_HorasCantidadTypeChanged.Designer.cs">
       <DependentUpon>201805272116267_HorasCantidadTypeChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805272358488_HorasExtraColumnChanged.cs" />
+    <Compile Include="Migrations\201805272358488_HorasExtraColumnChanged.Designer.cs">
+      <DependentUpon>201805272358488_HorasExtraColumnChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805280203357_HorasCompensadasInCompensacionTable.cs" />
+    <Compile Include="Migrations\201805280203357_HorasCompensadasInCompensacionTable.Designer.cs">
+      <DependentUpon>201805280203357_HorasCompensadasInCompensacionTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Asignacion.cs" />
     <Compile Include="Models\Asistencia.cs" />
@@ -613,12 +621,13 @@
     <Content Include="Views\Prestamo\Agregar.cshtml" />
     <Content Include="Views\Prestamo\Index.cshtml" />
     <Content Include="Views\Prestamo\Detalles.cshtml" />
+    <Content Include="Views\HorasExtra\ListarHorasExtra.cshtml" />
+    <Content Include="Views\Compensaciones\AgregarCompensacion.cshtml" />
+    <Content Include="Views\Compensaciones\ListarCompensaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Asignacion\" />
-    <Folder Include="Views\Compensaciones\" />
-    <Folder Include="Views\HorasExtra\" />
     <Folder Include="Views\Licencia\" />
     <Folder Include="Views\Mantenimiento\" />
     <Folder Include="Views\PermisoAvanzado\" />
@@ -684,6 +693,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805272116267_HorasCantidadTypeChanged.resx">
       <DependentUpon>201805272116267_HorasCantidadTypeChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805272358488_HorasExtraColumnChanged.resx">
+      <DependentUpon>201805272358488_HorasExtraColumnChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805280203357_HorasCompensadasInCompensacionTable.resx">
+      <DependentUpon>201805280203357_HorasCompensadasInCompensacionTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

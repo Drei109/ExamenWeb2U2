@@ -1,94 +1,103 @@
 ﻿using EXPRACU2_AGUIRRE_BASURTO.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using EXPRACU2_AGUIRRE_BASURTO.ViewModels;
 
 namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
 {
     public class CompensacionesController : Controller
     {
-        private Compensacion compensacion = new Compensacion();
-        // GET: Persona
-        public ActionResult Index(String criterio)
+        private ApplicationDbContext _context;
+
+        public CompensacionesController()
         {
+            _context = new ApplicationDbContext();
+        }
 
-            if (criterio == null || criterio == "")
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        [Route("Procesos/Compensacion/Listar")]
+        public ActionResult ListarCompensaciones()
+        {
+            var compensaciones = _context.Compensaciones.Include(m => m.Persona).ToList();
+            return View(compensaciones);
+        }
+
+        [Route("Procesos/Compensacion/Agregar/{id?}")]
+        public ActionResult AgregarCompensacion(int id=0)
+        {
+            if (id == 0)
             {
-                var per = new List<Compensacion>();
-                try
+                var viewModel = new CompensacionViewModel()
                 {
-                    using (var db = new ApplicationDbContext())
-                    {
-                        per = db.Compensaciones.ToList();
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-
-                }
-                return View(per);
+                    Personas = _context.Personal.ToList()
+                };
+                return View(viewModel);
             }
             else
             {
+                var compensacionInBd = _context.Compensaciones.Single(p => p.Id == id);
+                var viewModelInDb = new CompensacionViewModel();
+                viewModelInDb.Compensacion = compensacionInBd;
+                viewModelInDb.Personas = _context.Personal.ToList();
+                return View(viewModelInDb);
+            }
+        }
 
-                return View(Buscar(criterio));
-            }
-        }
-        public ActionResult Buscar(String criterio)
+        [HttpPost]
+        public ActionResult Agregar(CompensacionViewModel model)
         {
-            var persona1 = new List<Compensacion>();
-            using (var db = new ApplicationDbContext())
-            {
-                persona1 = db.Compensaciones.Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
-            }
-            return View(persona1);
-        }
-        public ActionResult Agregar(int id = 0)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                compensacion = db.Compensaciones.Where(x => x.Id == id).SingleOrDefault();
+            var compensacion = model.Compensacion;
+            ModelState.Remove("Persona");
+            var persona = _context.Personal.FirstOrDefault(p => p.Id == compensacion.PersonaId);
 
-            }
-            return View(id == 0 ? new Compensacion() : compensacion);
-        }
-        public ActionResult Guardar(Compensacion persona)
-        {
-            if (ModelState.IsValid)
+            if (compensacion.HorasCompensadas<=persona.HorasExtraAcumuladas)
             {
-                using (var db = new ApplicationDbContext())
+                if (compensacion.Id == 0)
                 {
-                    if (persona.Id > 0)
+                    _context.Compensaciones.Add(compensacion);
+
+                    var horasExtra = new HorasExtra()
                     {
-                        db.Entry(this).State = EntityState.Modified;
-                    }
-                    else
-                    {
-                        db.Entry(this).State = EntityState.Added;
-                    }
-                    db.SaveChanges();
+                        PersonaId = compensacion.PersonaId,
+                        Fecha = compensacion.Fecha,
+                        Motivo = "Compensación",
+                        Aumenta = false,
+                        HorasCantidad = compensacion.HorasCompensadas
+                    };
+                    _context.HorasExtra.Add(horasExtra);
                 }
-                return Redirect("~/Compensacion");
+                else
+                {
+                    var compensacionInDb = _context.Compensaciones.Single(p => p.Id == model.Compensacion.Id);
+                    compensacionInDb.Fecha = compensacion.Fecha;
+                    compensacionInDb.HorasCompensadas = compensacion.HorasCompensadas;
+                    compensacionInDb.PersonaId = compensacion.PersonaId;
+
+                    var horasExtraInDb = _context.HorasExtra.FirstOrDefault(p => p.Fecha == compensacion.Fecha && p.PersonaId == compensacion.Id);
+                    if (horasExtraInDb != null)
+                    {
+                        horasExtraInDb.PersonaId = compensacion.PersonaId;
+                        horasExtraInDb.Fecha = compensacion.Fecha;
+                        horasExtraInDb.Motivo = "Compensación";
+                        horasExtraInDb.Aumenta = false;
+                        horasExtraInDb.HorasCantidad = compensacion.HorasCompensadas;
+                    }
+                }
+                _context.SaveChanges();
+                var compensaciones = _context.Compensaciones.Include(m => m.Persona).ToList();
+                return View("ListarCompensaciones", compensaciones);
             }
-            else
+            
+            var viewModel = new CompensacionViewModel()
             {
-                return View("~/Views/Compensacion/Agregar.cshtml", persona);
-            }
-        }
-        public ActionResult Eliminar(int id = 0)
-        {
-            compensacion.Id = id;
-            using (var db = new ApplicationDbContext())
-            {
-                db.Entry(this).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
-            return Redirect("~/Compensacion");
+                Personas = _context.Personal.ToList()
+            };
+            return View ("AgregarCompensacion", viewModel);
         }
     }
 }

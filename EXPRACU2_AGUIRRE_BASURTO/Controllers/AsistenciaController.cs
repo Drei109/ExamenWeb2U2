@@ -72,6 +72,8 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                     if (asistenciaInDb.HoraSalida > asistenciaInDb.Persona.Turno.HoraFin)
                     {
                         var existe = _context.HorasExtra.FirstOrDefault(m => m.Fecha == asistenciaInDb.Fecha && m.PersonaId == asistenciaInDb.PersonaId);
+                        var horasDiferencia = asistenciaInDb.HoraSalida - asistenciaInDb.Persona.Turno.HoraFin;
+
                         if (existe == null)
                         {
                             var horasExtra = new HorasExtra()
@@ -80,7 +82,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                                 Fecha = asistenciaInDb.Fecha,
                                 Motivo = "Horas Extra",
                                 Aumenta = true,
-                                HorasCantidad = asistenciaInDb.HoraSalida - asistenciaInDb.Persona.Turno.HoraFin,
+                                HorasCantidad = horasDiferencia,
                             };
                             _context.HorasExtra.Add(horasExtra);
                         }
@@ -88,14 +90,15 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                         {
                             var horasExtra = _context.HorasExtra.SingleOrDefault(x => x.Id == existe.Id);
                             if (horasExtra != null)
-                                horasExtra.HorasCantidad = asistenciaInDb.HoraSalida - asistenciaInDb.Persona.Turno.HoraFin;
+                                horasExtra.HorasCantidad = horasDiferencia;
                         }
                     }
                 }
 
             }
             _context.SaveChanges();
+
             return RedirectToAction("TomarAsistencia");
         }
-     }
+    }
 }
