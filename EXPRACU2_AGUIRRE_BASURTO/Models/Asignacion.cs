@@ -9,7 +9,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        
         public Persona Persona { get; set; }
         [Required]
         [Column(TypeName = "Date")]

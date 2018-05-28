@@ -629,9 +629,20 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Asignacion\" />
     <Folder Include="Views\Licencia\" />
+    <Content Include="Views\Asignacion\Index.cshtml" />
+    <Content Include="Views\Asignacion\Agregar.cshtml" />
+    <Content Include="Views\Turno\Index.cshtml" />
+    <Content Include="Views\Licencia\Index.cshtml" />
+    <Content Include="Views\Licencia\Agregar.cshtml" />
+    <Content Include="Views\PermisoSimple\Index.cshtml" />
+    <Content Include="Views\PermisoSimple\Agregar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Compensaciones\" />
+    <Folder Include="Views\HorasExtra\" />
     <Folder Include="Views\Mantenimiento\" />
     <Folder Include="Views\PermisoAvanzado\" />
-    <Folder Include="Views\PermisoSimple\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

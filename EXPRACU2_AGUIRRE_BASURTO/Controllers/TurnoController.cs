@@ -47,8 +47,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             }
             return View(persona1);
         }
-
-        [Route("Mantenimiento/Turno/Agregar")]
+        
         public ActionResult Agregar(int id = 0)
         {
             using (var db = new ApplicationDbContext())
@@ -87,7 +86,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             turno.Id = id;
             using (var db = new ApplicationDbContext())
             {
-                db.Entry(this).State = EntityState.Deleted;
+                db.Entry(turno).State = EntityState.Deleted;
                 db.SaveChanges();
             }
             return Redirect("~/Turno");

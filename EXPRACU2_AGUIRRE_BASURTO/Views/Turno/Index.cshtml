@@ -1,7 +1,7 @@
-﻿@model List<EXPRACU2_AGUIRRE_BASURTO.Models.Prestamo>
+﻿@model List<EXPRACU2_AGUIRRE_BASURTO.Models.Turno>
 @{
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
-    ViewBag.Title = "Prestamo";
+    ViewBag.Title = "Asignacion";
 }
 <div class="row">
     <div class="col-lg-12">
@@ -10,7 +10,7 @@
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <h3 class="m-portlet__head-text">
-                            Lista de Prestamos
+                            Lista de Turnos
                         </h3>
                     </div>
                 </div>
@@ -34,11 +34,11 @@
                             </div>
                         </div>
                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                            <a href="/Prestamo/Agregar/0" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                            <a href="/Turno/Agregar/0" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                                 <span>
                                     <i class="flaticon-add-circular-button"></i>
                                     <span>
-                                        Nuevo Préstamo
+                                        Nuevo Turno
                                     </span>
                                 </span>
                             </a>
@@ -52,11 +52,10 @@
                     <thead>
                         <tr>
                             <th style="width:50px">ID</th>
-                            <th style="width:50px">Persona</th>
-                            <th style="width:100px">Cuotas</th>
-                            <th style="width:50px">Total</th>
-                            <th style="width:50px">Estado</th>
-                            <th style="width:200px"></th>
+                            <th style="width:50px">Descripcion</th>
+                            <th style="width:100px">Inicio</th>
+                            <th style="width:50px">Fin</th>                           
+                            <th style="width:150px"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,12 +64,11 @@
                         {
                             <tr>
                                 <td>@(item.Id)</td>
-                                <td>@(item.Persona.Nombres)</td>
-                                <td>@(item.Cuotas)</td>
-                                <td>@(item.Total.ToString("0.00"))</td>
-                                <td>@(item.Estado == "A" ? "Activo" : "Inactivo")</td>
-                                <td><a href="/Prestamo/Agregar/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Editar</a><a href="/Prestamo/Detalles/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Detalles</a><a href="/Prestamo/Eliminar/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Eliminar</a></td>
-                                
+                                <td>@(item.Descripcion)</td>
+                                <td>@(item.HoraInicio)</td>
+                                <td>@(item.HoraFin)</td>                               
+                                <td><a href="/Turno/Agregar/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Editar</a><a href="/Turno/Eliminar/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Eliminar</a></td>
+
                             </tr>
                         }
                     </tbody>

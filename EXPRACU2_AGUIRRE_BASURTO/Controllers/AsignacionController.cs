@@ -11,6 +11,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
     public class AsignacionController : Controller
     {
         private Asignacion asignacion = new Asignacion();
+        private Persona persona = new Persona();
         // GET: Persona
         public ActionResult Index(String criterio)
         {
@@ -22,7 +23,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                 {
                     using (var db = new ApplicationDbContext())
                     {
-                        per = db.Asignaciones.ToList();
+                        per = db.Asignaciones.Include(x => x.Persona).ToList();
 
                     }
                 }
@@ -44,7 +45,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             var persona1 = new List<Asignacion>();
             using (var db = new ApplicationDbContext())
             {
-                persona1 = db.Asignaciones.Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
+                persona1 = db.Asignaciones.Include(x => x.Persona).Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
             }
             return View(persona1);
         }
@@ -52,24 +53,31 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
         {
             using (var db = new ApplicationDbContext())
             {
-                asignacion = db.Asignaciones.Where(x => x.Id == id).SingleOrDefault();
+                List<Persona> person = db.Personal.ToList();
+                ViewBag.Persona = person;
+                asignacion = db.Asignaciones.Include(x => x.Persona).Where(x => x.Id == id).SingleOrDefault();
 
             }
             return View(id == 0 ? new Asignacion() : asignacion);
         }
         public ActionResult Guardar(Asignacion persona)
         {
+            using (var db = new ApplicationDbContext())
+            {
+                List<Persona> person = db.Personal.ToList();
+                ViewBag.Persona = person;
+            }
             if (ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
                 {
                     if (persona.Id > 0)
                     {
-                        db.Entry(this).State = EntityState.Modified;
+                        db.Entry(persona).State = EntityState.Modified;
                     }
                     else
                     {
-                        db.Entry(this).State = EntityState.Added;
+                        db.Entry(persona).State = EntityState.Added;
                     }
                     db.SaveChanges();
                 }
@@ -85,7 +93,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             asignacion.Id = id;
             using (var db = new ApplicationDbContext())
             {
-                db.Entry(this).State = EntityState.Deleted;
+                db.Entry(asignacion).State = EntityState.Deleted;
                 db.SaveChanges();
             }
             return Redirect("~/Asignacion");

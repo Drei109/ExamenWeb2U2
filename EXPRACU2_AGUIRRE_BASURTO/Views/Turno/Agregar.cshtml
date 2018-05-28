@@ -22,6 +22,7 @@
             <!--begin::Form-->
             @using (Html.BeginForm("Guardar", "Turno", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
             {
+                @Html.HiddenFor(x => x.Id)
                 @Html.AntiForgeryToken()
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">
@@ -32,6 +33,7 @@
                                @class = "form-control m-input",
                                @placeholder = "Ingrese Descripcion"
                            })
+                            @Html.ValidationMessageFor(m => m.Descripcion)
                         </div>
                         <div class="col-lg-6">
                         </div>
@@ -45,7 +47,8 @@
                                    @id = "m_timepicker_2_modal",
                                    @readonly="readonly",
                                    @placeholder= "Select time"
-                               })                         
+                               })   
+                            @Html.ValidationMessageFor(m => m.HoraInicio)
                         </div>   
                       
                     </div>     
@@ -59,6 +62,7 @@
                                    @readonly = "readonly",
                                    @placeholder = "Ingrese Hora de Inicio"
                                })    
+                            @Html.ValidationMessageFor(m => m.HoraFin)
                         </div>
                     </div>   
                 </div>
