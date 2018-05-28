@@ -1,7 +1,7 @@
-﻿@model EXPRACU2_AGUIRRE_BASURTO.Models.Prestamo
+﻿@model EXPRACU2_AGUIRRE_BASURTO.Models.PermisoSimple
 @{
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
-    ViewBag.Title = "Prestamo";
+    ViewBag.Title = "Licencia";
     List<EXPRACU2_AGUIRRE_BASURTO.Models.Persona> persona = ViewBag.Persona;
 }
 <div class="row">
@@ -15,32 +15,42 @@
                             <i class="la la-gear"></i>
                         </span>
                         <h3 class="m-portlet__head-text">
-                            Agregar Turno
+                            Agregar Licencia
                         </h3>
                     </div>
                 </div>
             </div>
             <!--begin::Form-->
-            @using (Html.BeginForm("Guardar", "Prestamo", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
+            @using (Html.BeginForm("Guardar", "PermisoSimple", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
             {
                 @Html.HiddenFor(x => x.Id)
                 @Html.AntiForgeryToken()
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6">
-                            @Html.Label("Categoria:")
+                            @Html.Label("Licencia:")
                             <select name="PersonaId" class="form-control">
                                 <option @(Model.PersonaId.Equals("") ? "selected" : "") value="">-Seleccione</option>
-                                    @foreach (var p in persona)
-                                    {
-                                        <option @(Model.PersonaId.Equals(p.Id) ? "Selected" : ""  ) value="@p.Id">@p.Nombres</option>
-                                    }
+                                @foreach (var p in persona)
+                                {
+                                    <option @(Model.PersonaId.Equals(p.Id) ? "Selected" : ""  ) value="@p.Id">@p.Nombres</option>
+                                }
                             </select>
                             @Html.ValidationMessageFor(x => x.PersonaId, null, new { @class = "label label-danger" })
                         </div>
                         <div class="col-lg-6">
                         </div>
                     </div>
+                    <div class="form-group m-form__group row">
+                        @Html.LabelFor(m => m.Motivo):
+                        @Html.TextBoxFor(m => m.Motivo, new
+                        {
+                            @class = "form-control m-input",
+                            @placeholder = "Ingrese Motivo"
+                        })
+                        @Html.ValidationMessageFor(m => m.Motivo)
+                    </div>
+
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6">
                             @Html.LabelFor(m => m.Fecha)
@@ -54,46 +64,35 @@
                             @Html.ValidationMessageFor(m => m.Fecha)
                         </div>
 
-                    </div>                 
-                    <div class="form-group m-form__group row">
-                        <div class="col-lg-6">
-                            @Html.LabelFor(m => m.Cantidad)
-                            @Html.TextBoxFor(m => m.Cantidad, new
-                       {
-                           @class = "form-control",
-                           @id = "m_touchspin_2_2",                          
-                           @placeholder = "Selecciona Cantidad"
-                       })
-                            @Html.ValidationMessageFor(m => m.Cantidad)
-                        </div>
                     </div>
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6">
-                            @Html.LabelFor(m => m.Cuotas)
-                            @Html.TextBoxFor(m => m.Cuotas, new
+                            @Html.LabelFor(m => m.HoraInicio)
+                            @Html.TextBoxFor(m => m.HoraInicio, new
                        {
                            @class = "form-control",
-                           @id = "m_touchspin_4",
+                           @id = "m_timepicker_2_modal",
                            @readonly = "readonly",
-                           @placeholder = "Ingrese Hora de Inicio"
+                           @placeholder = "Select time"
                        })
-                            @Html.ValidationMessageFor(m => m.Cuotas)
+                            @Html.ValidationMessageFor(m => m.HoraInicio)
                         </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <div class="col-lg-6">
-                            @Html.LabelFor(m => m.Interes)
-                            @Html.TextBoxFor(m => m.Interes, new
-                       {
-                           @class = "form-control",
-                           @id = "m_touchspin_1",
-                           @readonly = "readonly",
-                           @placeholder = "Ingrese Hora de Inicio"
-                       })
-                            @Html.ValidationMessageFor(m => m.Interes)
-                        </div>
-                    </div>
 
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6">
+                            @Html.LabelFor(m => m.HoraFin)
+                            @Html.TextBoxFor(m => m.HoraFin, new
+                       {
+                           @class = "form-control",
+                           @id = "m_timepicker_2_modal",
+                           @readonly = "readonly",
+                           @placeholder = "Select time"
+                       })
+                            @Html.ValidationMessageFor(m => m.HoraFin)
+                        </div>
+
+                    </div>
                     <div class="form-group m-form__group row">
                         <select name="Estado" class="form-control">
                             <option @(Model.Estado == "" ? "Selected" : "") value="">Seleccione</option>

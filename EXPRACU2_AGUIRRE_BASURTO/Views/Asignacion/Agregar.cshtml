@@ -36,7 +36,7 @@
                                     <option @(Model.PersonaId.Equals(p.Id) ? "Selected" : ""  ) value="@p.Id">@p.Nombres</option>
                                 }
                             </select>
-                            @Html.ValidationMessageFor(x => x.Id, null, new { @class = "label label-danger" })
+                            @Html.ValidationMessageFor(x => x.PersonaId, null, new { @class = "label label-danger" })
                         </div>
                         <div class="col-lg-6">
                         </div>
@@ -51,6 +51,7 @@
                            @readonly = "readonly",
                            @placeholder = "Select time"
                        })
+                            @Html.ValidationMessageFor(m => m.Mes)
                         </div>
 
                     </div>
@@ -63,6 +64,7 @@
                            @id = "m_touchspin_2_2",
                            @placeholder = "Selecciona Cantidad"
                        })
+                            @Html.ValidationMessageFor(m => m.Total)
                         </div>
                     </div>                                      
                     <div class="form-group m-form__group row">
@@ -71,7 +73,7 @@
                             <option @(Model.Estado == "" ? "Selected" : "Activo") value="A">Activo</option>
                             <option @(Model.Estado == "" ? "Selected" : "Inactivo") value="I">Inactivo</option>
                         </select>
-
+                        @Html.ValidationMessageFor(m => m.Estado)
                     </div>
                 </div>
                 <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">

@@ -67,8 +67,8 @@
                                 <td>@(item.Id)</td>
                                 <td>@(item.Persona.Nombres)</td>
                                 <td>@(item.Cuotas)</td>
-                                <td>@(item.Total)</td>
-                                <td>@(item.Estado == "A" ? "Activo" : "Ïnactivo")</td>
+                                <td>@(item.Total.ToString("0.00"))</td>
+                                <td>@(item.Estado == "A" ? "Activo" : "Inactivo")</td>
                                 <td><a href="/Prestamo/Agregar/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Editar</a><a href="/Prestamo/Detalles/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Detalles</a><a href="/Prestamo/Eliminar/@item.Id" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Eliminar</a></td>
                                 
                             </tr>

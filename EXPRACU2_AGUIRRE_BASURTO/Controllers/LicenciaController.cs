@@ -11,19 +11,26 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
     public class LicenciaController : Controller
     {
         private Licencia asignacion = new Licencia();
+        private Persona persona = new Persona();
         // GET: Persona
-        public ActionResult Index(String criterio)
+        public ActionResult Index(String criterio, Licencia persona)
         {
-
+            if (persona.FechaInicio <= DateTime.Today && persona.FechaFin >= DateTime.Today)
+            {
+                persona.Estado = "A";
+            }
+            else
+            {
+                persona.Estado = "I";
+            }
             if (criterio == null || criterio == "")
             {
                 var per = new List<Licencia>();
                 try
-                {
+                {                  
                     using (var db = new ApplicationDbContext())
                     {
-                        per = db.Licencias.ToList();
-
+                        per = db.Licencias.Include(x => x.Persona).ToList();
                     }
                 }
                 catch (Exception ex)
@@ -35,7 +42,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             }
             else
             {
-
                 return View(Buscar(criterio));
             }
         }
@@ -44,7 +50,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             var persona1 = new List<Licencia>();
             using (var db = new ApplicationDbContext())
             {
-                persona1 = db.Licencias.Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
+                persona1 = db.Licencias.Include(x => x.Persona).Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
             }
             return View(persona1);
         }
@@ -52,24 +58,39 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
         {
             using (var db = new ApplicationDbContext())
             {
-                asignacion = db.Licencias.Where(x => x.Id == id).SingleOrDefault();
+                List<Persona> person = db.Personal.ToList();
+                ViewBag.Persona = person;
+                asignacion = db.Licencias.Include(x => x.Persona).Where(x => x.Id == id).SingleOrDefault();
 
             }
             return View(id == 0 ? new Licencia() : asignacion);
         }
         public ActionResult Guardar(Licencia persona)
         {
+            if (persona.FechaInicio<=DateTime.Today && persona.FechaFin>=DateTime.Today)
+            {
+                persona.Estado = "A";
+            }
+            else
+            {
+                persona.Estado = "I";
+            }
+            using (var db = new ApplicationDbContext())
+            {
+                List<Persona> person = db.Personal.ToList();
+                ViewBag.Persona = person;
+            }
             if (ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
                 {
                     if (persona.Id > 0)
                     {
-                        db.Entry(this).State = EntityState.Modified;
+                        db.Entry(persona).State = EntityState.Modified;
                     }
                     else
                     {
-                        db.Entry(this).State = EntityState.Added;
+                        db.Entry(persona).State = EntityState.Added;
                     }
                     db.SaveChanges();
                 }
@@ -85,7 +106,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             asignacion.Id = id;
             using (var db = new ApplicationDbContext())
             {
-                db.Entry(this).State = EntityState.Deleted;
+                db.Entry(asignacion).State = EntityState.Deleted;
                 db.SaveChanges();
             }
             return Redirect("~/Licencia");

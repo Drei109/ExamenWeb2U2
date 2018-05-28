@@ -51,10 +51,10 @@
                         {
                             <tr>                            
                                 <td>@(Model.Fecha.AddMonths(i).ToShortDateString())</td>
-                                <td>@(Model.Cantidad/Model.Cuotas)</td>
-                                <td>@(Model.Cantidad*(Model.Interes/100))</td>
-                                <td>@((Model.Cantidad / Model.Cuotas) + (Model.Cantidad * (Model.Interes / 100) ))</td>   
-                                <td>@((Model.Cantidad / Model.Cuotas)*i + (Model.Cantidad * (Model.Interes / 100)))</td>
+                                <td>@((Model.Cantidad/Model.Cuotas).ToString("0.00"))</td>
+                                <td>@(((Model.Cantidad*(Model.Interes/100))/Model.Cuotas).ToString("0.00"))</td>
+                                <td>@(((Model.Cantidad / Model.Cuotas) + ((Model.Cantidad * (Model.Interes / 100))/Model.Cuotas)).ToString("0.00"))</td>   
+                                <td>@((((Model.Cantidad / Model.Cuotas) + ((Model.Cantidad * (Model.Interes / 100)) / Model.Cuotas)) *i).ToString("0.00"))</td>
                                 <td><a href="#" class="btn m-btn--square  btn-outline-primary m-btn m-btn--outline-2x ">Cancelado</a></td>
                             </tr>
                         }                       

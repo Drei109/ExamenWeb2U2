@@ -33,6 +33,7 @@
                                @class = "form-control m-input",
                                @placeholder = "Ingrese Descripcion"
                            })
+                            @Html.ValidationMessageFor(m => m.Descripcion)
                         </div>
                         <div class="col-lg-6">
                         </div>
@@ -46,7 +47,8 @@
                                    @id = "m_timepicker_2_modal",
                                    @readonly="readonly",
                                    @placeholder= "Select time"
-                               })                         
+                               })   
+                            @Html.ValidationMessageFor(m => m.HoraInicio)
                         </div>   
                       
                     </div>     
@@ -60,6 +62,7 @@
                                    @readonly = "readonly",
                                    @placeholder = "Ingrese Hora de Inicio"
                                })    
+                            @Html.ValidationMessageFor(m => m.HoraFin)
                         </div>
                     </div>   
                 </div>

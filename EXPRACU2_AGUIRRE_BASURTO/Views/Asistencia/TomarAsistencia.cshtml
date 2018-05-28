@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
     ViewBag.Title = "Asistencia";
+    var fecha = ((DateTime) ViewBag.Fecha).Date;
 }
 <div class="row">
     <div class="col-lg-12">
@@ -19,15 +20,33 @@
                 
                 @using (Html.BeginForm("Guardar", "Asistencia", FormMethod.Post, new { @class = "", role = "form" }))
                 {   <!--begin: Search Form -->
-                    for (var i = 0; i < Model.Count; i++)
-                     {
-                         @Html.HiddenFor(m => Model[i].Id)
-                         @Html.HiddenFor(m => Model[i].PersonaId)
-                     }
                     <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                         <div class="row align-items-center">
                             <div class="col-xl-8 order-2 order-xl-1">
                                 <div class="form-group m-form__group row align-items-center">
+                                    <div class="col-md-4">
+                                        <div class="m-input-icon m-input-icon--left">
+                                            <input class="form-control m-input" value="@fecha" data-val="true" data-val-date="El campo Fecha debe ser una fecha." name="fecha" id="m_datepicker_2" placeholder="Ingrese fecha de nacimiento"/>
+                                            @*@Html.TextBoxFor(m => m[0].Fecha, "{0:dd/MM/yyyy}", new
+                                            {
+                                                @class = "form-control m-input",
+                                                @id = "m_datepicker_2",
+                                                @placeholder = "Ingrese fecha de nacimiento",
+                                                @name = "fecha"
+                                            })*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" formaction="TomarAsistencia" class="btn m-btn--pill btn-outline-primary m-btn m-btn--custom m-btn--outline-2x">
+                                            <span>
+                                                <i class="flaticon-calendar-1"></i>
+                                                <span>
+                                                    Cambiar
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="m-input-icon m-input-icon--left">
                                             <input type="text" class="form-control m-input" placeholder="Buscar..." id="generalSearch">
@@ -41,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                <button type="submit" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                                <button type="submit" formaction="Guardar" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
                                     <span>
                                         <i class="flaticon-interface-1"></i>
                                         <span>
@@ -91,6 +110,11 @@
                         </tbody>
                     </table>
                     <!--end: Datatable -->
+                    for (var i = 0; i < Model.Count; i++)
+                    {
+                        @Html.HiddenFor(m => Model[i].Id)
+                        @Html.HiddenFor(m => Model[i].PersonaId)
+                    }
                 }
             </div>
         </div>
