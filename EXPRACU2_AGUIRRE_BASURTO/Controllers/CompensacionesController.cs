@@ -97,6 +97,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             {
                 Personas = _context.Personal.ToList()
             };
+            ViewBag.Error = "Horas Extra Insuficientes";
             return View ("AgregarCompensacion", viewModel);
         }
     }

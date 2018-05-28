@@ -1,0 +1,18 @@
+- Debido al tamaño del proyecto solo se subió el proyecto al TEAMS.
+
+INSTRUCCIONES DE USO:
+
+- LA BD está dentro del proyecto por lo tanto no se requieren scripts
+- Las asistencias se generan automáticamente según el día que se coloque
+- Si un trabajador marca después de su horario de trabajo (Según el turno), 
+  sus horas extra se acumulan y se muestran en la vista "Control de Horas Extra"
+- Las compensaciones solo se pueden dar si se cuenta con la cantidad de horas extra requerida,
+  de hacerlo, se restan esas horas a la cantidad de horas extra acumuladas,
+  y se muestran en la vista "Control de Horas Extra"
+- La cantidad de horas extras disponibles de cada trabajador se puede ver en la vista
+  "Personal" o en la vista "Control de horas extra"
+
+INTEGRANTES:
+
+- Andrei Aguirre Ramos
+- Leonardo Basurto Yatto
