@@ -24,7 +24,6 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
                     using (var db = new ApplicationDbContext())
                     {
                         per = db.Prestamos.Include(x=>x.Persona).ToList();
-
                     }
                 }
                 catch (Exception ex)
@@ -45,7 +44,7 @@ namespace EXPRACU2_AGUIRRE_BASURTO.Controllers
             var persona1 = new List<Prestamo>();
             using (var db = new ApplicationDbContext())
             {
-                persona1 = db.Prestamos.Include("Personal").Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
+                persona1 = db.Prestamos.Include(x => x.Persona).Where(x => x.Persona.Nombres.Contains(criterio)).ToList();
             }
             return View(persona1);
         }

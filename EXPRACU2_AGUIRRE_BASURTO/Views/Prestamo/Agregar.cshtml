@@ -23,6 +23,7 @@
             <!--begin::Form-->
             @using (Html.BeginForm("Guardar", "Prestamo", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
             {
+                @Html.HiddenFor(x => x.Id)
                 @Html.AntiForgeryToken()
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">

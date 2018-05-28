@@ -613,10 +613,12 @@
     <Content Include="Views\Prestamo\Agregar.cshtml" />
     <Content Include="Views\Prestamo\Index.cshtml" />
     <Content Include="Views\Prestamo\Detalles.cshtml" />
+    <Content Include="Views\Asignacion\Index.cshtml" />
+    <Content Include="Views\Asignacion\Agregar.cshtml" />
+    <Content Include="Views\Turno\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Asignacion\" />
     <Folder Include="Views\Compensaciones\" />
     <Folder Include="Views\HorasExtra\" />
     <Folder Include="Views\Licencia\" />
